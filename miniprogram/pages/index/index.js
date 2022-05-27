@@ -23,6 +23,18 @@ Page({
     this.db = wx.cloud.database()
     this._loadSwiper()
   },
+
+  gotoProduct(e) {
+    if(e.currentTarget.dataset === null) {
+      return
+    }
+    const {productId} = e.currentTarget.dataset
+
+    wx.navigateTo({
+      url: `/pages/product/index?id=${productId}`
+    })
+  },
+
   // 获取轮播图
   _loadSwiper() {
     // 

@@ -89,6 +89,7 @@
   font-size: 25rpx;
   color: #ffffff;
   text-decoration: underline;
+  pointer-events: all;
 }
 
 .swiper-float-content .swiper-dots {

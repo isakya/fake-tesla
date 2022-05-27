@@ -22,7 +22,7 @@
         <view class="action-btn">
           预约试驾
         </view>
-        <view class="view-config">
+        <view wx:if="{{currentSwiperIndex === index && item.product}}" class="title" wx:for="{{swiperList}}" wx:key="index" class="view-config" bindtap="gotoProduct" data-product-id="{{item.product}}"  > 
           查看参数
         </view>
         <view class="swiper-dots">

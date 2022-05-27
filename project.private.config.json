@@ -51,6 +51,13 @@
           "pathName": "pages/updateRecordSuccess/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "产品详情",
+          "pathName": "pages/product/index",
+          "query": "id=058dfefe6290c6c405eda4bb28d791e5",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
