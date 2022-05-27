@@ -1,15 +1,15 @@
 <view class="page">
   <view class="swiper">
     <swiper bindchange="onSwiperChange">
-      <swiper-item wx:for="{{swiperItems}}" wx:key="index">
-        <image src="{{item.imageUrl}}" mode="aspectFill"></image>
+      <swiper-item wx:for="{{swiperList}}" wx:key="index">
+        <image src="{{item.cover}}" mode="aspectFill"></image>
       </swiper-item>
     </swiper>
       <view class="swiper-float-content">
-        <view wx:if="{{currentSwiperIndex === index}}" class="title" wx:for="{{swiperItems}}" wx:key="index">
+        <view wx:if="{{currentSwiperIndex === index}}" class="title" wx:for="{{swiperList}}" wx:key="index">
           {{ item.title }}
         </view>
-        <view class="descriptions-area" wx:if="{{currentSwiperIndex === index}}" wx:for="{{swiperItems}}" wx:key="index">
+        <view class="descriptions-area" wx:if="{{currentSwiperIndex === index}}" wx:for="{{swiperList}}" wx:key="index">
           <view class="description" wx:for="{{item.config}}" wx:key="index">
             <view class="description-title">
               {{item.title}}
@@ -26,8 +26,56 @@
           查看参数
         </view>
         <view class="swiper-dots">
-          <view class="dot {{currentSwiperIndex !== index || 'active'}}" wx:for="{{swiperItems}}" wx:key="index"></view>
+          <view class="dot {{currentSwiperIndex !== index || 'active'}}" wx:for="{{swiperList}}" wx:key="index"></view>
         </view>
       </view>
+  </view>
+
+  <view class="magazine">
+    <view class="title">
+      T-Zone
+    </view>
+    <image class="cover" src="https://img0.baidu.com/it/u=512340543,3139277133&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281" alt=""/>
+    <view class="name">
+      2021年10月1号
+    </view>
+  </view>
+
+  <view class="icon-banner">
+    <image class="banner-bg credit-card" src="https://img0.baidu.com/it/u=512340543,3139277133&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281"></image>
+    <view class="content">
+      <view class="info">
+        <view class="title">
+          贷款计算器
+        </view>
+        <view class="subtitle">
+          定制我的金融方案
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="icon-banner">
+    <image class="banner-bg" src="https://img0.baidu.com/it/u=512340543,3139277133&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281"></image>
+    <view class="content">
+      <view class="title">
+        贷款计算器
+      </view>
+      <view class="subtitle">
+        定制我的金融方案
+      </view>
+    </view>
+  </view>
+
+  <view class="icon-box-area">
+    <view class="icon-box">
+      <image class="icon car" mode="widthFix" src="../../images/ic_clean_engry_policy.svg"></image>
+      <view class="title">新能源政策</view>
+    </view>
+    <view class="icon-box">
+      <!-- mode="widthFix" 这个属性可以根据图片高度自适应 -->
+      <image class="icon circle" mode="widthFix" src="../../images/ic_traidin.svg"></image>
+      <view class="title">车辆置换</view>
+    </view>
   </view>
 </view>

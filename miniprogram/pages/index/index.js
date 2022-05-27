@@ -5,50 +5,43 @@ Page({
    * 页面的初始数据
    */
   data: {
-    swiperItems: [
-      {
-        imageUrl: 'https://img0.baidu.com/it/u=512340543,3139277133&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281',
-        title: 'Model S',
-        config: [
-          {title: '637', subtitle: '公里续航'},
-          {title: '637', subtitle: '公里续航'},
-          {title: '637', subtitle: '公里续航'}
-        ]
-      },
-      {
-        imageUrl: 'https://img0.baidu.com/it/u=512340543,3139277133&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281',
-        title: 'Model Y',
-        config: [
-          {title: '637', subtitle: '公里续航'},
-          {title: '637', subtitle: '公里续航'},
-          {title: '637', subtitle: '公里续航'}
-        ]
-      },
-      {
-        imageUrl: 'https://img0.baidu.com/it/u=512340543,3139277133&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281',
-        title: 'Model X',
-        config: [
-          {title: '637', subtitle: '公里续航'},
-          {title: '627', subtitle: '公里续航'},
-          {title: '617', subtitle: '公里续航'}
-        ]
-      },
-    ],
+    swiperList: [],
     currentSwiperIndex: 0
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onSwiperChange(e) {
     const { current } = e.detail
     this.setData({
       currentSwiperIndex: current
     })
   },
-
+    /**
+   * 生命周期函数--监听页面加载
+   */
   onLoad(options) {
-
+    // 拿到数据库
+    this.db = wx.cloud.database()
+    this._loadSwiper()
+  },
+  // 获取轮播图
+  _loadSwiper() {
+    // 
+    this.db.collection('swiper').get().then(res => {
+      res.data.forEach((item1, index1) => {
+        item1.config.forEach((item2, index2) => {
+          let splitItems = item2.split("|")
+          item1.config[index2] = {
+            title: splitItems[0], 
+            subtitle: splitItems[1]
+          }
+        })
+        res.data[index1] = item1
+      })
+      console.log(res.data)
+      this.setData ({
+        swiperList: res.data
+      })
+    })
   },
 
   /**
