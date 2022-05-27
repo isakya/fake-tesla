@@ -1,0 +1,1 @@
+"D:\Program Files (x86)\Tencent\微信web开发者工具\cli.bat" cloud functions deploy --e cloud1-9g6fu5ytb8338c61 --n quickstartFunctions --r --project "C:\Users\Forever\WeChatProjects\fake-tesla" --report_first --report
