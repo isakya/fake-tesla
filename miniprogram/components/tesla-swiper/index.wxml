@@ -18,7 +18,7 @@
         </view>
       </view>
     </view>
-    <view class="action-btn">
+    <view bindtap="onBookBtnClick" class="action-btn">
       预约试驾
     </view>
     <view wx:if="{{current === index && item.product}}" class="title" wx:for="{{data}}" wx:key="index" class="view-config" bindtap="gotoProduct" data-product-id="{{item.product}}">

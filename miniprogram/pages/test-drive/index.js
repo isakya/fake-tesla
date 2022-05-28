@@ -1,41 +1,31 @@
-// pages/product/index.js
+// pages/test-drive/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    product: null,
-    productLines: null
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.db = wx.cloud.database()
-    this.db.collection('product').doc(options.id).get().then(res => {
-      this.setData({
-        product: res.data
-      })
-      this._loadProductLine(res.data.product_lines)
+    // 更改头部title
+    wx.setNavigationBarTitle({
+      title: '预约试乘试驾',
+    })
+    wx.setBackgroundColor({
+      backgroundColor: '#f7f7f7',
     })
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  _loadProductLine(productLines) {
-    let ids = []
-    productLines.forEach(item => {
-      ids.push(item)
-    })
-    this.db.collection('product_line').where({
-      _id: this.db.command.in(ids)
-    }).get().then(res => {
-      this.setData({
-        productLines: res.data
-      })
-    })
+  onReady() {
+
   },
 
   /**

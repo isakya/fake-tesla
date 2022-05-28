@@ -6,7 +6,8 @@ Page({
    */
   data: {
     swiperList: [],
-    currentSwiperIndex: 0
+    selectModelShow: false,
+    products: null
   },
 
 
@@ -17,6 +18,18 @@ Page({
     // 拿到数据库
     this.db = wx.cloud.database()
     this._loadSwiper()
+
+    this.db.collection('product').get().then(res => {
+      this.setData({
+        products: res.data
+      })
+      console.log(res.data)
+    })
+  },
+
+  // 预约试驾
+  onSwiperBookClick() {
+    this.setData({selectModelShow: true})
   },
 
   // 获取轮播图
@@ -33,7 +46,6 @@ Page({
         })
         res.data[index1] = item1
       })
-      console.log(res.data)
       this.setData ({
         swiperList: res.data
       })
@@ -80,6 +92,10 @@ Page({
    */
   onReachBottom() {
 
+  },
+
+  clickProduct(e) {
+    console.log(e.target.dataset.id)
   },
 
   /**

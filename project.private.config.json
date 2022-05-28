@@ -58,6 +58,13 @@
           "query": "id=058dfefe6290c6c405eda4bb28d791e5",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "预约页面",
+          "pathName": "pages/test-drive/index",
+          "query": "id=1",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

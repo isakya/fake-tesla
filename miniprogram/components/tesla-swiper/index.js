@@ -36,6 +36,10 @@ Component({
       wx.navigateTo({
         url: `/pages/product/index?id=${productId}`
       })
+    },
+    onBookBtnClick() {
+      // 把on-book-btn-click事件传递出去 给父组件
+      this.triggerEvent('on-book-btn-click')
     }
-  }
+  },
 })

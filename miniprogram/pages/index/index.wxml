@@ -1,5 +1,5 @@
 <view class="page">
-  <tesla-swiper style="width: 100%;" data="{{ swiperList }}" />
+  <tesla-swiper style="width: 100%;" data="{{ swiperList }}" bind:on-book-btn-click="onSwiperBookClick" />
 
   <view class="magazine">
     <view class="title">
@@ -48,4 +48,28 @@
       <view class="title">车辆置换</view>
     </view>
   </view>
+
+  <page-container 
+  show="{{selectModelShow}}"
+  round="{{true}}"
+  overlay="{{true}}"
+  duration="{{duration}}"
+  position="{{'bottom'}}"
+  close-on-slide-down="{{false}}"
+  custom-style="{{'z-index: 999'}}"
+  overlay-style="{{'z-index: 999'}}"
+>
+  <view class="popup-menu">
+    <view class="head">
+      <view class="title">选择车型</view>
+      <image class="close-icon" src="../../images/ic_close_dark.svg"></image>
+    </view>
+    <view class="content" wx:for="{{products}}" wx:key="index" bindtap="clickProduct" data-id="{{item._id}}">
+      <view class="item-box">
+        <view class="title">{{item.name}}</view>
+        <image src="{{item.car_pic}}"></image>
+      </view>
+    </view>
+  </view>
+</page-container>
 </view>
