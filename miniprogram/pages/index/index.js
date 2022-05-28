@@ -9,12 +9,7 @@ Page({
     currentSwiperIndex: 0
   },
 
-  onSwiperChange(e) {
-    const { current } = e.detail
-    this.setData({
-      currentSwiperIndex: current
-    })
-  },
+
     /**
    * 生命周期函数--监听页面加载
    */
@@ -22,17 +17,6 @@ Page({
     // 拿到数据库
     this.db = wx.cloud.database()
     this._loadSwiper()
-  },
-
-  gotoProduct(e) {
-    if(e.currentTarget.dataset === null) {
-      return
-    }
-    const {productId} = e.currentTarget.dataset
-
-    wx.navigateTo({
-      url: `/pages/product/index?id=${productId}`
-    })
   },
 
   // 获取轮播图
