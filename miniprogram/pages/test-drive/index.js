@@ -5,7 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    currentProduct: null,
+    provinces: ['浙江', '山西', '广东', '新疆', '江苏'],
+    cities: ['杭州', '西安', '广州', '乌鲁木齐', '南京'],
+    city: 0,
+    province: 0
   },
 
   /**
@@ -19,6 +23,33 @@ Page({
     wx.setBackgroundColor({
       backgroundColor: '#f7f7f7',
     })
+    this.db = wx.cloud.database()
+    this.db.collection('product').where({'_id': options.id}).get().then(res => {
+      this.setData({
+        currentProduct: res.data[0]
+      })
+    })
+  },
+
+  bindProvinceChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      province: e.detail.value
+    })
+  },
+
+  bindCityChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      city: e.detail.value
+    })
+  },
+
+  onInput(e) {
+    if(e.detail.value == '') {
+      console.log('error', '必填字段')
+    }
+    console.log(e.detail.value)
   },
 
   /**

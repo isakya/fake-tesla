@@ -95,7 +95,10 @@ Page({
   },
 
   clickProduct(e) {
-    console.log(e.target.dataset.id)
+    const {id} = e.currentTarget.dataset
+    wx.navigateTo({
+      url: `/pages/test-drive/index?id=${id}`
+    })
   },
 
   /**

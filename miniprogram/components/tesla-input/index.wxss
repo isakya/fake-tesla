@@ -1,0 +1,34 @@
+.input-item {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20rpx;
+}
+
+.input-item .label {
+  padding: 20rpx 25rpx;
+  font-size: 25rpx;
+}
+
+.input-item input {
+  padding: 24rpx 25rpx;
+  background-color: #faf;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #000;
+  border-radius: 50rpx;
+  border: 2rpx solid #fff;
+}
+
+.input-item .error {
+  border-color: red;
+}
+
+.input-item .error-message {
+  position: absolute;
+  right: 25rpx;
+  bottom: -35rpx;
+  font-size: 25rpx;
+  color: red;
+}
