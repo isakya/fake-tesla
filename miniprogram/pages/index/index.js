@@ -99,6 +99,7 @@ Page({
     wx.navigateTo({
       url: `/pages/test-drive/index?id=${id}`
     })
+    this.setData({selectModelShow: false})
   },
 
   /**

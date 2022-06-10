@@ -31,14 +31,20 @@ Component({
    */
   methods: {
     onInput(e) {
+      this.checkError()
+    },
+    checkError() {
+      let isError = false
       if(this.properties.required){
-        let isError = false
-        const { value } = e.detail
-        if(value === '') {
+        if(this.properties.value === '') {
           isError = true
         }
         this.setData({isError})
       }
+    },
+    isReady() {
+      this.checkError()
+      return !this.data.isError
     }
   }
 })
