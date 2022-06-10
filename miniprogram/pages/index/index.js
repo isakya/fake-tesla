@@ -7,11 +7,12 @@ Page({
   data: {
     swiperList: [],
     selectModelShow: false,
-    products: null
+    products: null,
+    magezine: {}
   },
 
 
-    /**
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
@@ -23,13 +24,21 @@ Page({
       this.setData({
         products: res.data
       })
-      console.log(res.data)
+    })
+
+    this.db.collection('magezine').get().then(res => {
+      const magezine = res.data[0]
+      this.setData({
+        magezine
+      })
     })
   },
 
   // 预约试驾
   onSwiperBookClick() {
-    this.setData({selectModelShow: true})
+    this.setData({
+      selectModelShow: true
+    })
   },
 
   // 获取轮播图
@@ -40,13 +49,13 @@ Page({
         item1.config.forEach((item2, index2) => {
           let splitItems = item2.split("|")
           item1.config[index2] = {
-            title: splitItems[0], 
+            title: splitItems[0],
             subtitle: splitItems[1]
           }
         })
         res.data[index1] = item1
       })
-      this.setData ({
+      this.setData({
         swiperList: res.data
       })
     })
@@ -95,13 +104,24 @@ Page({
   },
 
   clickProduct(e) {
-    const {id} = e.currentTarget.dataset
+    const {
+      id
+    } = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `/pages/test-drive/index?id=${id}`
     })
-    this.setData({selectModelShow: false})
+    this.setData({
+      selectModelShow: false
+    })
   },
-
+  clickMagazine(e) {
+    const {
+      id
+    } = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/magazine/index?id=${id}`
+    })
+  },
   /**
    * 用户点击右上角分享
    */

@@ -66,6 +66,20 @@
           "query": "id=1",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "首页",
+          "pathName": "pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "月刊详情页",
+          "pathName": "pages/magazine/index",
+          "query": "id=16db756f62a330bc069704ec385c3062",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
