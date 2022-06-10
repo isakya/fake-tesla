@@ -33,6 +33,7 @@ Component({
         return
       }
       const {productId} = e.currentTarget.dataset
+      console.log(productId)
       wx.navigateTo({
         url: `/pages/product/index?id=${productId}`
       })

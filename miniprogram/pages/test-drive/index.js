@@ -1,4 +1,8 @@
 // pages/test-drive/index.js
+import {
+  getCurrentLocation,
+  getProvincesAndCitiesTree
+} from '../../utils/location'
 Page({
 
   /**
@@ -6,10 +10,12 @@ Page({
    */
   data: {
     currentProduct: null,
-    provinces: ['浙江', '山西', '广东', '新疆', '江苏'],
-    cities: ['杭州', '西安', '广州', '乌鲁木齐', '南京'],
+    provincesAndCitiesTree: [],
+    cities: [],
     city: 0,
-    province: 0
+    province: 0,
+    currentProvinceIndex: 0,
+    currentCityIndex: 0
   },
 
   /**
@@ -24,29 +30,70 @@ Page({
       backgroundColor: '#f7f7f7',
     })
     this.db = wx.cloud.database()
-    this.db.collection('product').where({'_id': options.id}).get().then(res => {
+    this.db.collection('product').where({
+      '_id': options.id
+    }).get().then(res => {
       this.setData({
         currentProduct: res.data[0]
       })
     })
-  },
+    const {
+      city,
+      province
+    } = getCurrentLocation()
 
-  bindProvinceChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    const provincesAndCitiesTree = getProvincesAndCitiesTree()
+
+    const currentProvinceAndCities = provincesAndCitiesTree.filter(item => {
+      return item.fullname === province
+    })
+
+    const cities = currentProvinceAndCities[0].children
+    let currentProvinceIndex = 0
+    provincesAndCitiesTree.forEach((item,index) =>{
+      if(item.fullname === province ) {
+        currentProvinceIndex = index
+      }
+    })
+
+    let currentCityIndex = 0
+    cities.forEach((item,index) =>{
+      if(item.fullname === city ) {
+        currentCityIndex = index
+      }
+    })
+
     this.setData({
-      province: e.detail.value
+      city,
+      province,
+      currentProvinceIndex,
+      currentCityIndex,
+      cities: currentProvinceAndCities[0].children,
+      provincesAndCitiesTree
     })
   },
 
-  bindCityChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindProvinceChange: function (e) {
+    const index = e.detail.value
     this.setData({
-      city: e.detail.value
+      province: this.data.provincesAndCitiesTree[index].fullname,
+      city: this.data.provincesAndCitiesTree[index].children[0].fullname,
+      cities: this.data.provincesAndCitiesTree[index].children,
+      currentProvinceIndex: index,
+      currentCityIndex: 0
+    })
+  },
+
+  bindCityChange: function (e) {
+    const index = e.detail.value
+    this.setData({
+      city: this.data.cities[index].fullname,
+      currentCityIndex: index
     })
   },
 
   onInput(e) {
-    if(e.detail.value == '') {
+    if (e.detail.value == '') {
       console.log('error', '必填字段')
     }
     console.log(e.detail.value)
